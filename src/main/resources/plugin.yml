@@ -1,0 +1,6 @@
+name: GiveAllPlayers
+version: '${project.version}'
+main: me.atomictempest.giveallplayers.GiveAllPlayers
+api-version: 1.18
+authors: [ AtomicTempest ]
+description: Plugin to give all players an item
