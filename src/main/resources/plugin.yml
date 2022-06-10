@@ -4,3 +4,7 @@ main: me.atomictempest.giveallplayers.GiveAllPlayers
 api-version: 1.18
 authors: [ AtomicTempest ]
 description: Plugin to give all players an item
+commands:
+  giveall:
+    description: give items to every player currently on server
+    usage: /<command>
