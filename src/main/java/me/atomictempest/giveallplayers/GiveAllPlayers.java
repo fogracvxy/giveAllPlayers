@@ -48,6 +48,9 @@ public final class GiveAllPlayers extends JavaPlugin {
                     Integer itemAmountTest = Integer.parseInt(args[2]);
                     if (itemAmountTest <= 0) {
                         sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Amount can't be less than 0");
+                    }else if (target.getInventory().firstEmpty() == -1 ){
+                        sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + target.getName() + "'s inventory is full");
+
                     }else{
                         ItemStack itemStack = new ItemStack(itemType, parseInt(itemAmount));
                         target.getInventory().addItem(itemStack);
