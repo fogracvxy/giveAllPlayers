@@ -18,9 +18,8 @@ public final class GiveAllPlayers extends JavaPlugin {
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args ) {
-
-        Player player  = Bukkit.getPlayerExact(args[0]);
-        if(command.getName().equalsIgnoreCase("giveall")){
+        //if (sender instanceof Player){
+            if(command.getName().equalsIgnoreCase("giveall")){
             if (args.length < 2) {
                 sender.sendMessage("You need more arguments /giveall name item");
                 return false;
@@ -39,10 +38,16 @@ public final class GiveAllPlayers extends JavaPlugin {
             }
             ItemStack itemStack = new ItemStack(itemType);
             target.getInventory().addItem(itemStack);
-            target.sendMessage("Here you go!");
+            target.sendMessage("Here you go little gift from " + sender.getName());
             return true;
-   }
-        return false;
+        }
+       /* } else{
+            sender.sendMessage("You are not a player");
+            return false;
+        }*/
+
+
+return true;
    }
 
 
