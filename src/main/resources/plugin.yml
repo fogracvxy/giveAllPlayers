@@ -6,5 +6,8 @@ authors: [ AtomicTempest ]
 description: Plugin to give all players an item
 commands:
   giveall:
-    description: give items to every player currently on server
+    description: give items to player you choose online
+    usage: /<command>
+  giveallplayers:
+    description: give items to currently all online players
     usage: /<command>

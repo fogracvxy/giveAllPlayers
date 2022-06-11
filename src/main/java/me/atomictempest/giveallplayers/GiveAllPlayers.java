@@ -1,6 +1,5 @@
 package me.atomictempest.giveallplayers;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -12,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
+import static org.bukkit.Bukkit.getOnlinePlayers;
 
 public final class GiveAllPlayers extends JavaPlugin {
 
@@ -26,7 +26,7 @@ public final class GiveAllPlayers extends JavaPlugin {
         //if (sender instanceof Player){
             if(command.getName().equalsIgnoreCase("giveall")){
             if (args.length < 3) {
-                sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + " You need more arguments /giveall <name> <item> <amount>");
+                sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + " You need more arguments /giveall <name> <item> <amount>");
                 return true;
             }
 
@@ -55,7 +55,7 @@ public final class GiveAllPlayers extends JavaPlugin {
                         ItemStack itemStack = new ItemStack(itemType, parseInt(itemAmount));
                         target.getInventory().addItem(itemStack);
                         target.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.YELLOW + " Recieved " + itemAmount + " " +  itemType.toString().toLowerCase() + " from: " + ChatColor.AQUA +sender.getName());
-
+                        return true;
                     }
 
                 }catch(NumberFormatException e)
@@ -66,7 +66,37 @@ public final class GiveAllPlayers extends JavaPlugin {
                 }
 
                 }
+        if(command.getName().equalsIgnoreCase("giveallplayers")){
+            if (args.length < 2) {
+                sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + " You need more arguments /giveallplayers <itemname> <amount> ");
+                return true;
+            }
+            Material itemType = Material.matchMaterial(args[0]);
+            if (itemType == null) { //Provjera postoji li materijal
+                sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Unknown material: " + args[0] + ".");
+                return true;
+            }
+            for(Player player : getOnlinePlayers()){
+                try{
 
+                    Integer itemAmountTest = Integer.parseInt(args[1]);
+                    if (itemAmountTest <= 0) {
+                        sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Amount can't be less than 0");
+                    }else{
+                        ItemStack itemStack = new ItemStack(itemType, itemAmountTest);
+                        player.getInventory().addItem(itemStack);
+                        player.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.YELLOW + " Recieved " + itemAmountTest + " " +  itemType.toString().toLowerCase() + " from: " + ChatColor.AQUA +sender.getName());
+                        return true;
+                    }
+                }catch(NumberFormatException e){
+                    sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Amount can only be number");
+
+                }
+
+
+            }
+
+        }
        /* } else{
             sender.sendMessage("You are not a player");
             return false;
@@ -74,6 +104,8 @@ public final class GiveAllPlayers extends JavaPlugin {
 
 
 return true;
+
+
    }
 
 
