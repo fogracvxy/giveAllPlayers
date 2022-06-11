@@ -1,12 +1,15 @@
 package me.atomictempest.giveallplayers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Locale;
 
 public final class GiveAllPlayers extends JavaPlugin {
 
@@ -38,7 +41,7 @@ public final class GiveAllPlayers extends JavaPlugin {
             }
             ItemStack itemStack = new ItemStack(itemType);
             target.getInventory().addItem(itemStack);
-            target.sendMessage("Here you go little gift from " + sender.getName());
+            target.sendMessage(ChatColor.YELLOW + "Recieved "  +  itemType.toString().toLowerCase() + " from:  " + ChatColor.AQUA +sender.getName());
             return true;
         }
        /* } else{
