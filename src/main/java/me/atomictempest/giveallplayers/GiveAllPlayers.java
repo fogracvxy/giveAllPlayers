@@ -26,8 +26,8 @@ public final class GiveAllPlayers extends JavaPlugin {
         //if (sender instanceof Player){
             if(command.getName().equalsIgnoreCase("giveall")){
             if (args.length < 3) {
-                sender.sendMessage("You need more arguments /giveall <name> <item> <amount>");
-                return false;
+                sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + " You need more arguments /giveall <name> <item> <amount>");
+                return true;
             }
 
             String playerName = args[0];
@@ -35,30 +35,30 @@ public final class GiveAllPlayers extends JavaPlugin {
 
             Player target = sender.getServer().getPlayerExact(playerName);
             if (target == null) { // provjera jel player online
-                sender.sendMessage("Player " + playerName + " is not online.");
+                sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Player " + playerName + " is not online.");
                 return true;
             }
             Material itemType = Material.matchMaterial(args[1]);
             if (itemType == null) { //Provjera postoji li materijal
-                sender.sendMessage("Unknown material: " + args[1] + ".");
+                sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Unknown material: " + args[1] + ".");
                 return true;
             }
                 try
                 {
                     Integer itemAmountTest = Integer.parseInt(args[2]);
                     if (itemAmountTest <= 0) {
-                        sender.sendMessage("Amount can't be less than 0");
+                        sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Amount can't be less than 0");
                     }else{
                         ItemStack itemStack = new ItemStack(itemType, parseInt(itemAmount));
                         target.getInventory().addItem(itemStack);
-                        target.sendMessage(ChatColor.YELLOW + "Recieved " + itemAmount + " " +  itemType.toString().toLowerCase() + " from:  " + ChatColor.AQUA +sender.getName());
+                        target.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.YELLOW + " Recieved " + itemAmount + " " +  itemType.toString().toLowerCase() + " from: " + ChatColor.AQUA +sender.getName());
 
                     }
 
                 }catch(NumberFormatException e)
                 {
-                    sender.sendMessage("Amount can only be number");
-                    e.printStackTrace();
+                    sender.sendMessage(ChatColor.DARK_GREEN+"[" + ChatColor.DARK_RED + "GiveAll" + ChatColor.DARK_GREEN + "]" + ChatColor.RED + " Amount can only be number");
+
                     //args[3] is not an int
                 }
 
